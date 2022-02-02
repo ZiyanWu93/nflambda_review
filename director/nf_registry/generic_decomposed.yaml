@@ -1,0 +1,46 @@
+name: gd
+state:
+  - name: state_gdd
+    properties:
+      - private
+    registration_id: 0
+  - name: state_gdc
+    properties:
+      - private
+    registration_id: 1
+
+action:
+  - name: packet_in
+  - name: gd_classifier
+    state:
+      state_gdd
+    registration_id: 3
+    properties:
+      - data_operation
+
+  - name: gd_control
+    state:
+      state_gdc
+    registration_id: 4
+    properties:
+      - control_operation
+
+  - name: gd_data
+    state:
+      state_gdd
+    registration_id: 5
+    properties:
+      - data_operation
+
+  - name: packet_out
+
+edges:
+  gd_classifier:
+     - packet_in
+  gd_control:
+     - gd_classifier
+  gd_data:
+     - gd_classifier
+     - gd_control
+  packet_out:
+    - gd_data

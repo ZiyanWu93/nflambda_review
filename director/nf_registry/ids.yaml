@@ -1,0 +1,37 @@
+name: ids
+
+state:
+  - name: ids_blacklist
+    properties:
+      - private
+  - name: rule_set
+    properties:
+      - private
+
+action:
+  - name: ids_classifier
+    state:
+      ids_blacklist
+    properties:
+      - data_operation
+
+  - name: ids_rule_checker
+    state:
+      rule_set
+    properties:
+      - control_operation
+  - name: drop
+  - name: packet_in
+  - name: packet_out
+
+edges:
+  ids_rule_checker:
+     - ids_classifier
+  packet_out:
+    - ids_classifier
+    - ids_rule_checker
+  drop:
+    - ids_rule_checker
+    - ids_classifier
+  ids_classifier:
+    - packet_in

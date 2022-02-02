@@ -1,0 +1,36 @@
+name: lb
+
+state:
+  - name: lb_data_state
+    properties:
+      - private
+  - name: lb_control_state
+    properties:
+      - private
+
+action:
+  - name: lb_classifier
+    state:
+      lb_data_state
+    properties:
+      - data_operation
+
+  - name: service_selector
+    state:
+      lb_control_state
+    properties:
+      - control_operation
+
+  - name: flow_mapper
+    state:
+      lb_data_state
+    properties:
+      - data_operation
+
+
+edges:
+  service_selector:
+     - lb_classifier
+  flow_mapper:
+     - lb_classifier
+     - service_selector
