@@ -1,0 +1,22 @@
+state:
+  - name: gdd_state
+    shared: False
+  - name: gdc_state
+    shared: False
+
+action:
+  - name: gd_classifier
+    per_packet_operation : True
+    depenencies_action_list: None
+  - name: action_generic_decomposed_control
+    per_packet_operation: False
+    depenencies_action_list:
+      - action_name : action_generic_decomposed_classifier
+  - name: state_generic_decomposed_data
+    per_packet_operation: False
+    depenencies_action_list:
+      - action_name: action_generic_decomposed_control
+      - action_name: action_generic_decomposed_classifier
+
+shared_library:
+  - path: temp

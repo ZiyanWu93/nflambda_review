@@ -1,0 +1,12 @@
+max_pkt_burst : 256
+mbuf_cache_size : 250
+num_mbufs : 131071
+f_complexity : 0
+#nf :  NF_GENERIC_MONO
+nf :  NF_GENERIC_DECOMPOSED
+#nf :  NF_FWD
+nb_rxd : 512
+nb_txd : 1024
+# portParameter :
+#   port : 0
+#   n_queue : 24
